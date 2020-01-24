@@ -1,6 +1,8 @@
 {
-  "parent": "block/cube",
+  "parent": "block/orientable",
   "textures": {
-    "all": "freezermod:block/freezer"
+    "top": "freezermod:block/freezer_all",
+    "front": "freezermod:block/freezer_front",
+    "side": "freezermod:block/freezer_all"
   }
 }     
