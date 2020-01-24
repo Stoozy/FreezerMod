@@ -1,0 +1,14 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+#issueTrackerURL=""
+
+[[mods]]
+    modId="freezermod"
+    namespace="freezermod"
+    version="${version}"
+    displayName="Freezer Mod"
+    authors="Stoozy"
+    description='''
+    Oopsie
+    '''
+
