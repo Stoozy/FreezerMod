@@ -93,6 +93,7 @@ public class freezerMod {
 
         public static void RegisterBlocks(final RegistryEvent.Register<Block> event) {
             IForgeRegistry registry = event.getRegistry();
+
             // register a new block here
              RegistryEvents.FREEZER_BLOCK = new Block(Block.Properties
                     .create(Material.ANVIL)

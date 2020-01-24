@@ -1,6 +1,6 @@
 {
   "parent": "block/cube_all",
   "textures": {
-    "all": "freezer:block/freezer_block"
+    "all": "freezermod:block/freezer"
   }
-}
+}     
