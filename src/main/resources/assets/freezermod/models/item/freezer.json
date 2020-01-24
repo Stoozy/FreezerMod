@@ -1,3 +1,6 @@
 {
-  "all": "freezermod:item/freezer"
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "freezermod:item/freezer"
+  }
 }

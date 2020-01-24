@@ -108,9 +108,12 @@ public class freezerMod {
         @SubscribeEvent
         public static void RegisterItems(final RegistryEvent.Register<Item> event){
             IForgeRegistry registry = event.getRegistry();
+//            Item FREEZER_ITEM = new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName(FREEZER_BLOCK.getRegistryName());
             Item FREEZER_BLOCKITEM = new BlockItem(RegistryEvents.FREEZER_BLOCK, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(FREEZER_BLOCK.getRegistryName());
 
-            registry.register(FREEZER_BLOCKITEM );
+            registry.register(FREEZER_BLOCKITEM);
+//            registry.register(FREEZER_ITEM );
+
             LOGGER.info("ITEMS REGISTERED");
         }
 
