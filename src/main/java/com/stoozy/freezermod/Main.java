@@ -2,14 +2,22 @@ package com.stoozy.freezermod;
 
 import com.stoozy.freezermod.util.Reference;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
+import net.minecraft.stats.Stats;
+import net.minecraft.util.Hand;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.BlockRayTraceResult;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.ToolType;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
@@ -28,12 +36,12 @@ import org.apache.logging.log4j.Logger;
 import java.util.stream.Collectors;
 
 @Mod(Reference.MODID)
-public class freezerMod {
+public class Main {
 
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public void freezerMod() {
+    public void Main() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading
@@ -58,6 +66,8 @@ public class freezerMod {
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+
+
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)
@@ -87,21 +97,13 @@ public class freezerMod {
 
     public static class RegistryEvents {
 
-        public static Block FREEZER_BLOCK = null;
 
         @SubscribeEvent
-
         public static void RegisterBlocks(final RegistryEvent.Register<Block> event) {
             IForgeRegistry registry = event.getRegistry();
 
             // register a new block here
-             RegistryEvents.FREEZER_BLOCK = new Block(Block.Properties
-                    .create(Material.ANVIL)
-                    .hardnessAndResistance(5)
-                    .harvestLevel(2)
-                    .harvestTool(ToolType.PICKAXE)).setRegistryName(Reference.MODID, "freezer");
-
-            registry.register(FREEZER_BLOCK);
+            registry.register(freezer.block);
             LOGGER.info("BLOCKS REGISTERED");
         }
 
@@ -109,13 +111,15 @@ public class freezerMod {
         public static void RegisterItems(final RegistryEvent.Register<Item> event){
             IForgeRegistry registry = event.getRegistry();
 //            Item FREEZER_ITEM = new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName(FREEZER_BLOCK.getRegistryName());
-            Item FREEZER_BLOCKITEM = new BlockItem(RegistryEvents.FREEZER_BLOCK, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(FREEZER_BLOCK.getRegistryName());
+            Item FREEZER_BLOCKITEM = new BlockItem(freezer.block, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(freezer.block.getRegistryName());
 
             registry.register(FREEZER_BLOCKITEM);
 //            registry.register(FREEZER_ITEM );
 
             LOGGER.info("ITEMS REGISTERED");
         }
+
+
 
 
     }
