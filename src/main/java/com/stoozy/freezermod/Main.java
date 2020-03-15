@@ -38,8 +38,16 @@ import java.util.stream.Collectors;
 @Mod(Reference.MODID)
 public class Main {
 
+
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
+    // Instansiate freezer class
+    public static freezer f = new freezer(Block.Properties
+            .create(Material.ANVIL)
+            .hardnessAndResistance(5)
+            .harvestLevel(2)
+            .harvestTool(ToolType.PICKAXE));
+
 
     public void Main() {
         // Register the setup method for modloading
@@ -55,6 +63,8 @@ public class Main {
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+
+
     private void setup(final FMLCommonSetupEvent event)
     {
         // some preinit code
@@ -66,6 +76,7 @@ public class Main {
     private void doClientStuff(final FMLClientSetupEvent event) {
         // do something that can only be done on the client
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
+
 
 
     }
@@ -98,12 +109,13 @@ public class Main {
     public static class RegistryEvents {
 
 
+
         @SubscribeEvent
         public static void RegisterBlocks(final RegistryEvent.Register<Block> event) {
             IForgeRegistry registry = event.getRegistry();
 
             // register a new block here
-            registry.register(freezer.block);
+            registry.register(f);
             LOGGER.info("BLOCKS REGISTERED");
         }
 
@@ -111,13 +123,15 @@ public class Main {
         public static void RegisterItems(final RegistryEvent.Register<Item> event){
             IForgeRegistry registry = event.getRegistry();
 //            Item FREEZER_ITEM = new Item(new Item.Properties().group(ItemGroup.MISC)).setRegistryName(FREEZER_BLOCK.getRegistryName());
-            Item FREEZER_BLOCKITEM = new BlockItem(freezer.block, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(freezer.block.getRegistryName());
+            Item FREEZER_BLOCKITEM = new BlockItem(f, new Item.Properties().group(ItemGroup.MISC)).setRegistryName(f.getRegistryName());
 
             registry.register(FREEZER_BLOCKITEM);
 //            registry.register(FREEZER_ITEM );
 
             LOGGER.info("ITEMS REGISTERED");
         }
+
+
 
 
 
